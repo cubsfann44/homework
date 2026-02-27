@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Unblocked Games</title>
+    <style>
+        body { font-family: sans-serif; background: #121212; color: white; text-align: center; }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 40px; }
+        .game-card { background: #1f1f1f; padding: 20px; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+        .game-card:hover { transform: scale(1.05); background: #333; }
+        iframe { width: 90%; height: 80vh; border: none; display: none; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🎮 My Unblocked Games</h1>
+    <div id="grid" class="game-grid">
+        <div class="game-card" onclick="playGame('https://www.google.com/logos/2010/pacman10-i.html')">
+            <h3>Pac-Man</h3>
+        </div>
+        </div>
+    
+    <button onclick="backToHome()" id="backBtn" style="display:none; margin: 20px; padding: 10px;">Back to Games</button>
+    <iframe id="gameFrame"></iframe>
+
+    <script>
+        function playGame(url) {
+            document.getElementById('grid').style.display = 'none';
+            document.getElementById('backBtn').style.display = 'inline-block';
+            const frame = document.getElementById('gameFrame');
+            frame.src = url;
+            frame.style.display = 'block';
+        }
+        function backToHome() {
+            document.getElementById('grid').style.display = 'grid';
+            document.getElementById('backBtn').style.display = 'none';
+            document.getElementById('gameFrame').style.display = 'none';
+            document.getElementById('gameFrame').src = '';
+        }
+    </script>
+</body>
+</html>
