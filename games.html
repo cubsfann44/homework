@@ -3,39 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games</title>
+    <title>Math Educational Games</title>
     <style>
-        /* Anti-blocker style */
-        body { display: block; }
-    </style>
-    <script>
-        // Proxy detection bypass
-        if (navigator.plugins.length == 0) {
-            // Logic to bypass proxy detection by assuming no plugins indicate unblocked access
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
         }
-
-        // Script injection prevention
-        document.addEventListener('DOMContentLoaded', function() {
-            // Prevent any scripts from being dynamically added
-            Object.freeze(window);
-        });
-
-        // Network filter evasion technique
-        (function() {
-            // Logic to obscure network requests or alter request headers
-            const originalFetch = window.fetch;
-            window.fetch = function(input, init) {
-                if (init) {
-                    init.headers = new Headers();
-                    // Modify headers to evade network filters
-                }
-                return originalFetch.apply(this, arguments);
-            };
-        })();
-    </script>
+        h1 {
+            color: #2e8b57;
+        }
+        a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .game-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Games</h1>
-    <p>Enjoy your gaming experience!</p>
+    <h1>Welcome to Math Educational Games!</h1>
+    <p>Engage your mind with our collection of math games that make learning fun!</p>
+
+    <div class="game-card">
+        <h2><a href="#">Math Jeopardy</a></h2>
+        <p>Test your math knowledge with this exciting game!</p>
+    </div>
+
+    <div class="game-card">
+        <h2><a href="#">Sudoku</a></h2>
+        <p>Challenge your logical thinking and number skills!</p>
+    </div>
+
+    <div class="game-card">
+        <h2><a href="#">Math Puzzles</a></h2>
+        <p>Solve puzzles that will enhance your math abilities!</p>
+    </div>
+
+    <div class="game-card">
+        <h2><a href="#">Fraction Games</a></h2>
+        <p>Learn fractions through interactive gameplay!</p>
+    </div>
 </body>
 </html>
