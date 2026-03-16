@@ -3,57 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Educational Games</title>
+    <title>Interactive Games</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #2e8b57;
-        }
-        a {
-            color: #1e90ff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .game-card {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 10px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+        body { font-family: Arial, sans-serif; }
+        .game-container { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+        .game { margin: 10px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; text-align: center; }
+        button { margin: 5px; padding: 10px; }
     </style>
 </head>
 <body>
-    <h1>Welcome to Math Educational Games!</h1>
-    <p>Engage your mind with our collection of math games that make learning fun!</p>
-
-    <div class="game-card">
-        <h2><a href="#">Math Jeopardy</a></h2>
-        <p>Test your math knowledge with this exciting game!</p>
+    <h1>Interactive Playable Games</h1>
+    <div class="game-container">
+        <div class="game" id="tic-tac-toe">
+            <h2>Tic Tac Toe</h2>
+            <div>
+                <button onclick="ticTacToePlay(0);"></button>
+                <button onclick="ticTacToePlay(1);"></button>
+                <button onclick="ticTacToePlay(2);"></button>
+            </div>
+            <div>
+                <button onclick="ticTacToePlay(3);"></button>
+                <button onclick="ticTacToePlay(4);"></button>
+                <button onclick="ticTacToePlay(5);"></button>
+            </div>
+            <div>
+                <button onclick="ticTacToePlay(6);"></button>
+                <button onclick="ticTacToePlay(7);"></button>
+                <button onclick="ticTacToePlay(8);"></button>
+            </div>
+            <button onclick="resetTicTacToe();">Reset</button>
+        </div>
+        <div class="game" id="rock-paper-scissors">
+            <h2>Rock Paper Scissors</h2>
+            <button onclick="playRPS('rock');">Rock</button>
+            <button onclick="playRPS('paper');">Paper</button>
+            <button onclick="playRPS('scissors');">Scissors</button>
+            <div id="rps-result"></div>
+        </div>
+        <div class="game" id="snake">
+            <h2>Snake</h2>
+            <canvas id="snakeCanvas" width="200" height="200"></canvas>
+            <div>
+                <button onclick="startSnake();">Start Game</button>
+            </div>
+        </div>
+        <div class="game" id="game2048">
+            <h2>2048</h2>
+            <div id="grid"></div>
+            <button onclick="start2048();">New Game</button>
+        </div>
+        <div class="game" id="flappy-bird">
+            <h2>Flappy Bird</h2>
+            <canvas id="flappyCanvas" width="400" height="600"></canvas>
+            <button onclick="startFlappy();">Start</button>
+        </div>
+        <div class="game" id="hangman">
+            <h2>Hangman</h2>
+            <div id="hangmanWord"></div>
+            <button onclick="startHangman();">New Word</button>
+        </div>
+        <div class="game" id="simon-says">
+            <h2>Simon Says</h2>
+            <button onclick="startSimon();">Start Game</button>
+            <div id="simonSequence"></div>
+        </div>
+        <div class="game" id="whack-a-mole">
+            <h2>Whack-a-Mole</h2>
+            <button onclick="startWhackAMole();">Start Game</button>
+            <div id="moleField"></div>
+        </div>
+        <div class="game" id="connect-four">
+            <h2>Connect Four</h2>
+            <div id="connect4board"></div>
+            <button onclick="resetConnect4();">Reset</button>
+        </div>
+        <div class="game" id="dice-roller">
+            <h2>Dice Roller</h2>
+            <button onclick="rollDice();">Roll Dice</button>
+            <div id="diceResult"></div>
+        </div>
     </div>
-
-    <div class="game-card">
-        <h2><a href="#">Sudoku</a></h2>
-        <p>Challenge your logical thinking and number skills!</p>
-    </div>
-
-    <div class="game-card">
-        <h2><a href="#">Math Puzzles</a></h2>
-        <p>Solve puzzles that will enhance your math abilities!</p>
-    </div>
-
-    <div class="game-card">
-        <h2><a href="#">Fraction Games</a></h2>
-        <p>Learn fractions through interactive gameplay!</p>
-    </div>
+    <script>
+        // Tic Tac Toe Logic
+        let ticTacToeBoard = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        function ticTacToePlay(index) {
+            if (!ticTacToeBoard[index]) {
+                ticTacToeBoard[index] = currentPlayer;
+                document.querySelectorAll('#tic-tac-toe button')[index].innerText = currentPlayer;
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            }
+        }
+        function resetTicTacToe() {
+            ticTacToeBoard.fill('');
+            document.querySelectorAll('#tic-tac-toe button').forEach(button => button.innerText = '');
+            currentPlayer = 'X';
+        }
+        
+        // Rock Paper Scissors Logic
+        function playRPS(playerChoice) {
+            const choices = ['rock', 'paper', 'scissors'];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            let result;
+            if (playerChoice === computerChoice) {
+                result = 'It’s a tie!';
+            } else if (
+                (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                (playerChoice === 'paper' && computerChoice === 'rock') ||
+                (playerChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                result = 'You win!';
+            } else {
+                result = 'You lose!';
+            }
+            document.getElementById('rps-result').innerText = `You chose ${playerChoice}. Computer chose ${computerChoice}. ${result}`;
+        }
+        
+        // Snake Logic
+        function startSnake() {
+            // Implement Snake game logic here
+        }
+        
+        // 2048 Logic
+        function start2048() {
+            // Implement 2048 game logic here
+        }
+        
+        // Flappy Bird Logic
+        function startFlappy() {
+            // Implement Flappy Bird game logic here
+        }
+        
+        // Hangman Logic
+        function startHangman() {
+            // Implement Hangman game logic here
+        }
+        
+        // Simon Says Logic
+        function startSimon() {
+            // Implement Simon Says game logic here
+        }
+        
+        // Whack-a-Mole Logic
+        function startWhackAMole() {
+            // Implement Whack-a-Mole game logic here
+        }
+        
+        // Connect Four Logic
+        function resetConnect4() {
+            // Implement Connect Four game logic here
+        }
+        
+        // Dice Roller Logic
+        function rollDice() {
+            const result = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('diceResult').innerText = 'You rolled a ' + result;
+        }
+    </script>
 </body>
 </html>
